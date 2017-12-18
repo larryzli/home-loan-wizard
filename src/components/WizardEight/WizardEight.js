@@ -1,23 +1,70 @@
-import React,  { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { updateHistory } from "../../ducks/reducer";
+import { connect } from "react-redux";
 
 class WizardEight extends Component {
-
-    render(){
-        return(
+    render() {
+        return (
             <div className="parent-div">
-                    <div className="vert-align">                    
-                        <p>Have you had a bankruptcy or foreclosure in the past seven years? </p><br />
+                <div className="vert-align">
+                    <p>
+                        Have you had a bankruptcy or foreclosure in the past
+                        seven years?{" "}
+                    </p>
+                    <br />
                     <div className="row">
-                        <Link to="/wNine"><button value="Has never been in bankruptcy" onClick={this.props.updateHistory}>No</button></Link>
-                        <Link to="/wNine"><button value="Has had bankruptcy before" onClick={this.props.updateHistory}>Bankruptcy</button></Link>
-                        <Link to="/wNine"><button value="Has had a foreclosure before" onClick={this.props.updateHistory}>Foreclosure</button></Link>
-                        <Link to="/wNine"><button value="Has had both a foreclosure and a bankruptcy" onClick={this.props.updateHistory}>Both</button></Link>
+                        <Link to="/wNine">
+                            <button
+                                value="Has never been in bankruptcy"
+                                onClick={e =>
+                                    this.props.updateHistory(e.target.value)
+                                }
+                            >
+                                No
+                            </button>
+                        </Link>
+                        <Link to="/wNine">
+                            <button
+                                value="Has had bankruptcy before"
+                                onClick={e =>
+                                    this.props.updateHistory(e.target.value)
+                                }
+                            >
+                                Bankruptcy
+                            </button>
+                        </Link>
+                        <Link to="/wNine">
+                            <button
+                                value="Has had a foreclosure before"
+                                onClick={e =>
+                                    this.props.updateHistory(e.target.value)
+                                }
+                            >
+                                Foreclosure
+                            </button>
+                        </Link>
+                        <Link to="/wNine">
+                            <button
+                                value="Has had both a foreclosure and a bankruptcy"
+                                onClick={e =>
+                                    this.props.updateHistory(e.target.value)
+                                }
+                            >
+                                Both
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
-export default WizardEight;
+const mapStateToProps = state => {
+    return {
+        history: state.history
+    };
+};
+
+export default connect(mapStateToProps, { updateHistory })(WizardEight);
