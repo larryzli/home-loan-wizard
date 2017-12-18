@@ -35,6 +35,7 @@ const UPDATE_ADDRESS_THREE = "UPDATE_ADDRESS_THREE";
 const UPDATE_FIRST_NAME = "UPDATE_FIRST_NAME";
 const UPDATE_LAST_NAME = "UPDATE_LAST_NAME";
 const UPDATE_EMAIL = "UPDATE_EMAIL";
+const START_OVER = "START_OVER";
 
 // ACTION CREATORS
 export function updateLoanType(loanType) {
@@ -133,6 +134,12 @@ export function updateEmail(email) {
         payload: email
     };
 }
+export function startOver() {
+    return {
+        type: START_OVER,
+        payload: initialState
+    };
+}
 
 // REDUCER
 function reducer(state = initialState, action = {}) {
@@ -201,6 +208,8 @@ function reducer(state = initialState, action = {}) {
             return Object.assign({}, state, {
                 email: action.payload
             });
+        case START_OVER:
+            return Object.assign({}, state, action.payload);
         default:
             return state;
     }
